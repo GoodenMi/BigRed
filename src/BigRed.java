@@ -4,27 +4,34 @@
 import java.util.Scanner;
 public class BigRed {
     public static void main(String[] args) {
-        int choice;
+        String choice;
         Scanner input = new Scanner(System.in);
-        System.out.println("Welcome. Choose the number for what class you would like to be.");
-        System.out.println("1.Knight. 2.Mage. 3.Rouge");
-        choice = input.nextInt();
-        if(choice >3||choice<1){
-            while(choice>3||choice<1){
-                System.out.println("That is not a valid choice. Choose again.");
-                choice = input.nextInt();
-            }
-        }
+        System.out.println("Welcome. Choose the class you would like to be.");
+        System.out.println("Knight. Mage. Rouge");
+        choice = input.nextLine();
         System.out.println("What would you like your character's name to be?");
         String name = input.nextLine();
         player one = new player(choice,name);
+        standardLoop(one);
     }
-    public player battleLoop(player one, npc.enemy[] enemies){
-
+    public static void standardLoop(player one){
+        String choice2 = " ";
+        while(choice2!= "quit") {
+            Scanner input = new Scanner(System.in);
+            System.out.println("What would you like to do?");
+            choice2 = input.nextLine();
+            if (choice2 == "equip"){
+                System.out.println("What would you like to equip?");
+                choice2 = input.nextLine();
+                one.equip(choice2);
+            } else if(choice2 == "unequip"){
+                System.out.println("What would you like to unequip.");
+                choice2 = input.nextLine();
+                one.unequip(choice2);
+            } else{
+                System.out.println("That is not a valid choice.");
+            }
+        }
     }
-
-    public void standardLoop(){}
-    
-    public void talkLoop(){}
 
 }

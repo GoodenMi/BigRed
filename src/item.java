@@ -5,10 +5,15 @@ public class item {
     String name;
     String description;
     int value;
+    int equipSlot;
     public item(String name,String description,int value){
         this.name = name;
         this.value = value;
         this.description = description;
+        this.equipSlot = -1;
+    }
+    public int getSlot(){
+        return this.equipSlot;
     }
     public static class equippable extends item{
         int wisMod;
@@ -16,6 +21,8 @@ public class item {
         int strMod;
         int manaMod;
         int hpMod;
+        int protection;
+        int equipSlot;
         public equippable(String name, String description, int value, int wisMod, int dexMod, int manaMod, int hpMod, int strMod){
             super(name,description,value);
             this.wisMod = wisMod;
@@ -23,7 +30,9 @@ public class item {
             this.manaMod = manaMod;
             this.dexMod = dexMod;
             this.hpMod = hpMod;
+            this.protection = 0;
         }
+
         public void Stats() {
             System.out.println(this.name + ": " + this.description +" It is worth " + this.value + " gold coins.");
             if (this.hpMod != 0) {
@@ -56,7 +65,7 @@ public class item {
     public static class armor extends equippable {
         int protection;
         int condition;
-
+        int equipSlot;
         public armor(String name, String description, int protection, int value, int condition, int wisMod, int strMod, int dexMod, int manaMod, int hpMod) {
             super(name, description, value, wisMod, dexMod, manaMod, hpMod, strMod);
             this.protection = protection;
@@ -65,6 +74,7 @@ public class item {
             this.strMod = strMod;
             this.manaMod = manaMod;
             this.wisMod = wisMod;
+            this.equipSlot = 0;
         }
 
         public int getProtection() {
@@ -88,6 +98,13 @@ public class item {
             if (this.manaMod != 0) {
                 System.out.println("It's mana modifier is " + manaMod);
             }
+        }
+    }
+    public class headgear extends armor{
+        int equipSlot;
+        public headgear(String name, String description, int protection, int value, int condition, int wisMod, int strMod, int dexMod, int manaMod, int hpMod){
+            super(name, description, protection, value, condition, wisMod, strMod, dexMod, manaMod, hpMod);
+            this.equipSlot = 1;
         }
     }
 }

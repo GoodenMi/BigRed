@@ -16,34 +16,38 @@ public class player{
     int gold = 30;
     attacks[] attackList;
     item[] inventory;
-    item.armor[] equipped;
+    item.equippable[] equipInventory;
+    item.equippable[] equipped;
     item.equippable rightwield;
     item.equippable leftwield;
     String playerClass;
     String name;
-    public player(int choice, String name){
+    public player(String choice, String name){
         this.level = 1;
         this.name = name;
         this.inventory = new item[15];
         this.inventorySize = 15;
-        this.equipped = new item.armor[3];
-        if(choice == 1){
+        this.equipInventory = new item.equippable[10];
+        this.equipped = new item.equippable[3];
+        if(choice == "Knight"){
             this.playerClass = "Knight";
             this.strength = 10;
             this.dex = 8;
             this.hp = 12;
             this.wisdom = 5;
             this.mana = 4;
+            inventory[0] = new item.armor("Iron Plate Mail 2","Heavy plate armor",10,100,100,0,0,-2,0,0);
+            inventory[1] = new item.armor("Iron Helmet 2", "Good head protection",5,80,100,0,0,-1,0,0);
             this.equipped[0]= new item.armor("Iron Plate Mail","Heavy plate armor",10,100,100,0,0,-2,0,0);
-            this.equipped[1] = new item.armor("Iron Helemt", "Good head protection",5,80,100,0,0,-1,0,0);
-            this.leftwield = new item.armor("Iron Kite Shield","A favorite of kinghts",7,80,100,0,0,-1,0,0);
+            this.equipped[1] = new item.armor("Iron Helmet", "Good head protection",5,80,100,0,0,-1,0,0);
+            this.leftwield = new item.armor("Iron Kite Shield","A favorite of knights",7,80,100,0,0,-1,0,0);
             this.rightwield = new item.weapon("Iron Broadsword","A dull broadsword",5,50,100,0,0,0,0,0);
             this.defence = this.equipped[0].protection + this.equipped[1].protection;
             this.dex += this.rightwield.dexMod;
             this.dex += this.leftwield.dexMod;
             this.dex += this.equipped[0].dexMod;
             this.dex += this.equipped[1].dexMod;
-        } else if(choice ==2){
+        } else if(choice =="Mage"){
             this.playerClass = "Mage";
             this.strength = 5;
             this.dex = 6;
@@ -57,7 +61,7 @@ public class player{
             this.wisdom+= this.equipped[1].wisMod;
             this.wisdom+= this.rightwield.wisMod;
             this.defence = this.equipped[0].protection + this.equipped[1].protection;
-        } else if(choice == 3){
+        } else if(choice == "Rouge"){
             this.playerClass = "Rouge";
             this.strength = 7;
             this.dex = 12;
@@ -72,12 +76,45 @@ public class player{
             this.leftwield = new item.weapon("Dagger","Dull Iron dagger",3,20,100,0,0,2,0,0);
             this.dex+= this.rightwield.dexMod;
             this.dex+= this.leftwield.dexMod;
+        } else{
+            System.out.println("That is not a valid class.");
         }
 
     }
 
-    public void equip(item subject){
+    public void equip(String item){
+        item.equippable subject = getEItemInv(item);
         if(hasItem(subject)==true){
+            if (this.equipped[subject.getSlot()]==null && subject.equipSlot!= -1){
+                this.equipped[subject.getSlot()] = subject;
+            } else {
+                unequip(equipped[subject.getSlot()].name);
+                this.equipped[subject.getSlot()] = subject;
+            }
+        } else{
+            System.out.println("That Item is not in your inventory.");
+        }
+    }
+    public item.equippable getEItemInv(String item){
+        for(int i = 0; i<inventorySize; i++){
+            if(inventory[i].name == item && inventory[i].equipSlot!= -1){
+                return equipInventory[i];
+            }
+        }
+        return null;
+    }
+    public void unequip(String item){
+        item.equippable subject = getEItemInv(item);
+        if(equipped[subject.getSlot()]==subject){
+            for(int i=0; i<inventorySize;i++){
+                if(inventory[i] ==null){
+                    equipInventory[i] = subject;
+                    break;
+                }
+            }
+            equipped[subject.getSlot()] = null;
+        } else{
+            System.out.println("This item is not equipped.");
         }
     }
 
