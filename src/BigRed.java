@@ -24,5 +24,7 @@ public class BigRed {
     }
 
     public void standardLoop(){}
+    
+    public void talkLoop(){}
 
 }
