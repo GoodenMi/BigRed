@@ -1,5 +1,5 @@
 /**
- * Created by Miles on 9/17/2016.
+ * player class
  */
 import java.util.Random;
 import java.util.Scanner;
@@ -22,6 +22,13 @@ public class player{
     item.equippable leftwield;
     String playerClass;
     String name;
+
+    /**
+     * Constructor for player object. Creates representation of the human player.
+     *
+     * @param choice
+     * @param name
+     */
     public player(String choice, String name){
         this.level = 1;
         this.name = name;
