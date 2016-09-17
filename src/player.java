@@ -12,17 +12,20 @@ public class player{
     int hp;
     int mana;
     int defence;
+    int inventorySize;
+    int gold = 30;
     attacks[] attackList;
     item[] inventory;
     item.armor[] equipped;
-    item rightwield;
-    item leftwield;
+    item.equippable rightwield;
+    item.equippable leftwield;
     String playerClass;
     String name;
     public player(int choice, String name){
         this.level = 1;
         this.name = name;
         this.inventory = new item[15];
+        this.inventorySize = 15;
         this.equipped = new item.armor[3];
         if(choice == 1){
             this.playerClass = "Knight";
@@ -35,7 +38,11 @@ public class player{
             this.equipped[1] = new item.armor("Iron Helemt", "Good head protection",5,80,100,0,0,-1,0,0);
             this.leftwield = new item.armor("Iron Kite Shield","A favorite of kinghts",7,80,100,0,0,-1,0,0);
             this.rightwield = new item.weapon("Iron Broadsword","A dull broadsword",5,50,100,0,0,0,0,0);
-            this.defence = this.equipped[0].getProtection() + this.equipped[1].getProtection();
+            this.defence = this.equipped[0].protection + this.equipped[1].protection;
+            this.dex += this.rightwield.dexMod;
+            this.dex += this.leftwield.dexMod;
+            this.dex += this.equipped[0].dexMod;
+            this.dex += this.equipped[1].dexMod;
         } else if(choice ==2){
             this.playerClass = "Mage";
             this.strength = 5;
@@ -46,6 +53,10 @@ public class player{
             this.equipped[0] = new item.armor("Simple robes","The cloth robes of a mage",2,30,100,5,0,0,3,0);
             this.equipped[1] = new item.armor("mage hood", "A cloth hood",1,15,100,3,0,0,1,0);
             this.rightwield = new item.weapon("Staff","A wooden staff.",3,10,100,3,0,0,2,0);
+            this.wisdom+= this.equipped[0].wisMod;
+            this.wisdom+= this.equipped[1].wisMod;
+            this.wisdom+= this.rightwield.wisMod;
+            this.defence = this.equipped[0].protection + this.equipped[1].protection;
         } else if(choice == 3){
             this.playerClass = "Rouge";
             this.strength = 7;
@@ -55,29 +66,56 @@ public class player{
             this.mana = 2;
             this.equipped[0] = new item.armor("Leather armor", " light armor made of cowhide",5,50,100,0,0,3,0,0);
             this.equipped[1] = new item.armor("Cloak", "A smiple cloth cloak.",0,20,100,0,0,5,0,0);
+            this.dex+= this.equipped[0].dexMod;
+            this.dex+= this.equipped[1].dexMod;
             this.rightwield = new item.weapon("Dagger","Dull Iron dagger",3,20,100,0,0,2,0,0);
+            this.leftwield = new item.weapon("Dagger","Dull Iron dagger",3,20,100,0,0,2,0,0);
+            this.dex+= this.rightwield.dexMod;
+            this.dex+= this.leftwield.dexMod;
         }
 
     }
-    public int attack(){
+
+    public void equip(item subject){
+        if(hasItem(subject)==true){
+
+        }
+
+    }
+
+    public boolean hasItem(item subject){
+        for(int i=0;i<this.inventorySize;i++){
+            if(this.inventory[i]==subject){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int hitChance(boolean isMagic){
+        int hitChance;
         Random rand = new Random();
         int x = rand.nextInt(20)+1;
-        int hitChance = this.dex * x;
+        if(this.playerClass == "Mage" && isMagic==true){
+            hitChance = this.wisdom*x;
+        }else {
+            hitChance = this.dex * x;
+        }
         return hitChance;
     }
     public int getLevel(){
         return this.level;
     }
 
-    public void printStats(player one){
-        System.out.println("Your level is: " + one.level);
-        System.out.println("Your hp is: " + one.hp);
-        System.out.println("Your mana is: " + one.mana);
-        System.out.println("Your strength is: " + one.strength);
-        System.out.println("Your dexterity is: "+ one.dex);
-        System.out.println("Your wisdom is: " + one.wisdom);
+    public void printStats(){
+        System.out.println("Your level is: " + this.level);
+        System.out.println("Your hp is: " + this.hp);
+        System.out.println("Your mana is: " + this.mana);
+        System.out.println("Your strength is: " + this.strength);
+        System.out.println("Your dexterity is: "+ this.dex);
+        System.out.println("Your wisdom is: " + this.wisdom);
     }
-    public void levelUp(player one){
+    public void levelUp(){
         Scanner input = new Scanner(System.in);
         System.out.println("Congratulations! You have leveled up! You have 5 skill points to use. " +
                 "Where would you like to use them?");
@@ -86,19 +124,19 @@ public class player{
             System.out.println("1.Strength 2.Dexterity 3.Wisdom 4.hp 5.mana");
             int choice = input.nextInt();
             if(choice == 1){
-                one.strength++;
+                this.strength++;
                 points--;
             } else if(choice == 2){
-                one.dex++;
+                this.dex++;
                 points--;
             } else if(choice == 3){
-                one.wisdom++;
+                this.wisdom++;
                 points--;
             } else if(choice == 4){
-                one.hp++;
+                this.hp++;
                 points--;
             } else if(choice == 5){
-                one.mana++;
+                this.mana++;
                 points--;
             } else{
                 System.out.println("That is not a valid input. Try again.");

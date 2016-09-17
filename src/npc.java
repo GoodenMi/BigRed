@@ -26,4 +26,13 @@ public class npc {
             this.npcClass = npcClass;
         }
     }
+    public class Shopkeeper extends npc {
+    	item[] shop;
+        int itemNumber;
+    	public Shopkeeper(String name, String description, String[] talkingTree, int karma, int talkingPoints, int itemsNumber){
+    		super(name, description, talkingTree, karma, talkingPoints);
+    		this.shop = new item[itemNumber];
+    	}
+    }
+    	
 }
