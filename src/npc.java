@@ -27,11 +27,11 @@ public class npc {
         }
     }
     public class Shopkeeper extends npc {
-    	item[] shop;
-        int itemNumber;
-    	public Shopkeeper(String name, String description, String[] talkingTree, int karma, int talkingPoints, int itemsNumber){
+    	Shop[] items; //does this work??
+    	String npcClass;
+    	public Shopkeeper(String name, String description, String[] talkingTree, int karma, int talkingPoints, String[] shop.itemsTree, int Shop.itemsNumber String npcClass){
     		super(name, description, talkingTree, karma, talkingPoints);
-    		this.shop = new item[itemNumber];
+    		this.shop.itemsTree = new String[shop.itemsNumber];
     	}
     }
     	
