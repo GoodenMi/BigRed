@@ -10,7 +10,6 @@ public class item {
         this.name = name;
         this.value = value;
         this.description = description;
-        this.equipSlot = -1;
     }
     public int getSlot(){
         return this.equipSlot;
