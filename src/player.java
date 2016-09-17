@@ -66,7 +66,7 @@ public class player{
                 points--;
             } else if(choice == 2){
                 one.dex++;
-                points--
+                points--;
             } else if(choice == 3){
                 one.wisdom++;
                 points--;

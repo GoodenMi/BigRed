@@ -19,7 +19,9 @@ public class BigRed {
         String name = input.nextLine();
         player one = new player(choice,name);
     }
-    public player battleLoop(){}
+    public player battleLoop(player one, npc.enemy[] enemies){
+
+    }
 
     public void standardLoop(){}
 
