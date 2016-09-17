@@ -20,18 +20,22 @@ public class npc {
         int strength;
         int wisdom;
         int protection;
+        int expAwarded;
         String npcClass;
-        public enemy(String name, String description, String[] talkingTree, int karma, int talkingPoints, item drop, String npcClass) {
+        public enemy(String name, String description, String[] talkingTree, int karma, int talkingPoints, item drop, int expAwarded, String npcClass) {
             super(name, description, talkingTree, karma, talkingPoints);
             this.npcClass = npcClass;
+            this.expAwarded = expAwarded;
         }
-    }
+   
     public class Shopkeeper extends npc {
-    	item[] Shop; //yes it does
+    	item[] Shop; 
         int itemsNumber;
-    	public Shopkeeper(String name, String description, String[] talkingTree, int karma, int talkingPoints, int itemsNumber){
+        int goldOnHand;
+    	public Shopkeeper(String name, String description, String[] talkingTree, int karma, int talkingPoints, int itemsNumber, int goldOnHand){
     		super(name, description, talkingTree, karma, talkingPoints);
     		this.Shop = new item[itemsNumber];
+    		this.goldOnHand = goldOnHand;
     	}
     }
     	

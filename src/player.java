@@ -78,9 +78,7 @@ public class player{
 
     public void equip(item subject){
         if(hasItem(subject)==true){
-
         }
-
     }
 
     public boolean hasItem(item subject){
