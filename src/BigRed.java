@@ -24,7 +24,6 @@ public class BigRed {
         String name = input.nextLine();
         player one = new player(choice,name);
         standardLoop(one);
-        System.out.println("all done.");
     }
     public static void standardLoop(player one){
         String choice = " ";
@@ -42,7 +41,12 @@ public class BigRed {
                 one.unequip(choice);
             } else if (choice.equals("stats")){
                 one.printStats();
-            }else {
+            }else if(choice.equals("quit")) {
+                System.out.println("All done! Bye!");
+                System.exit(0);
+            }else if(choice.equals("einv")) {
+                one.printEquipableInv();
+            } else{
                 System.out.println("That is not a valid choice.");
             }
         }
