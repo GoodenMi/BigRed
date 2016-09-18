@@ -103,6 +103,10 @@ public class item {
             this.location = "left";
         }
     }
+    
+    public String getName() {
+        return this.name;
+    }
 
 }
 
