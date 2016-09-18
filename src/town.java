@@ -9,16 +9,29 @@ public class town {
 
     private static final List<String> TOWN_NAMES = new ArrayList<>();
 
+    private static final int NUMBER_OF_POIS = 4;
+
     private String name;
     private String description;
     // String is name of town, Integer is distance to town
     private List<Road> neighbors;
-    private Map<String, pointofinterest> pointsOfInterest;
+    private List<pointofinterest> pointsOfInterest;
     private pointofinterest frontGate;
 
+    /**
+     * Constructor to generate a random town
+     */
     public town() {
+        if (TOWN_NAMES.size() == 0) { // populate list
+            initTown();
+        }
         Random ran = new Random();
         this.name = TOWN_NAMES.remove(ran.nextInt(TOWN_NAMES.size()));
+        // generate POIs
+        this.pointsOfInterest = new ArrayList<>();
+        for (int i = 0; i < NUMBER_OF_POIS; i++) {
+            //this.pointsOfInterest.add(new )
+        }
         // generate description
         String desc = "";
         this.neighbors = new ArrayList<>();
@@ -50,10 +63,6 @@ public class town {
 
     public String getName() {
         return this.name;
-    }
-
-    public Map<String, pointofinterest> getPointsOfInterest() {
-        return this.pointsOfInterest;
     }
 
 

@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -6,15 +8,15 @@ import java.util.Map;
  */
 public class world {
 
-    private Map<String, town> world;
+    private List<town> world;
 
     /**
      * Constructor. Creates the start town and initializes the graph representation of the world.
      */
     public world() {
         town startTown = new town();
-        this.world = new HashMap<String, town>();
-        this.world.put(startTown.getName(), startTown);
+        this.world = new ArrayList<>();
+        this.world.add(startTown);
     }
 
 }
