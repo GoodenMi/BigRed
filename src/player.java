@@ -122,6 +122,16 @@ public class player{
         }
     }
 
+    public void putEItem(item.equippable subject){
+        for(int i=0; i<equipInventorySize; i++){
+            if(equipInventory[i]==null){
+                equipInventory[i] = subject;
+                break;
+            }
+        }
+        System.out.println("Your equippable item inventory is full.");
+    }
+
     public item.equippable getEItemInv(String item){
         for(int i = 0; i<this.equipInventorySize; i++){
             if(this.equipInventory[i]!= null) {
