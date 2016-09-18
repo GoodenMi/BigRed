@@ -30,6 +30,7 @@ public class npc {
             this.npcClass = npcClass;
             this.expAwarded = expAwarded;
         }
+    }
 
         public class Shopkeeper extends npc {
             item[] Shop;
@@ -44,4 +45,3 @@ public class npc {
         }
 
     }
-}
