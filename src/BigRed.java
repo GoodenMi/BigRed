@@ -1,10 +1,18 @@
 /**
  * Created by Miles on 9/16/2016.
  */
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 public class BigRed {
     public static void main(String[] args) {
+        initWeapon();
+        initArmor();
+        initShield();
+        initHeadGear();
         String choice = " ";
         Scanner input = new Scanner(System.in);
         while(true) {
@@ -24,6 +32,7 @@ public class BigRed {
         System.out.println("What would you like your character's name to be?");
         String name = input.nextLine();
         player one = new player(choice,name);
+        one.putEItem(getRandomArmor(one));
         standardLoop(one);
     }
 
@@ -126,5 +135,219 @@ public class BigRed {
             }
         }
     }
+    public static List<item.weapon> WEAPON_TIER_0 = new ArrayList<>();
+    public static List<item.weapon> WEAPON_TIER_1 = new ArrayList<>();
+    public static List<item.weapon> WEAPON_TIER_2 = new ArrayList<>();
+    public static List<item.weapon> WEAPON_TIER_3 = new ArrayList<>();
+    public static List<item.weapon> WEAPON_TIER_4 = new ArrayList<>();
+    public static List<item.weapon> WEAPON_TIER_5 = new ArrayList<>();
+
+    public item.weapon getRandomWeapon(player player) {
+        Random ran = new Random();
+        item.weapon hg;
+        switch (player.level/10) {
+            case 0:
+                hg = WEAPON_TIER_0.get(ran.nextInt(WEAPON_TIER_0.size()));
+                break;
+            case 1:
+                hg = WEAPON_TIER_1.get(ran.nextInt(WEAPON_TIER_1.size()));
+                break;
+            case 2:
+                hg = WEAPON_TIER_2.get(ran.nextInt(WEAPON_TIER_2.size()));
+                break;
+            case 3:
+                hg = WEAPON_TIER_3.get(ran.nextInt(WEAPON_TIER_3.size()));
+                break;
+            case 4:
+                hg = WEAPON_TIER_4.get(ran.nextInt(WEAPON_TIER_4.size()));
+                break;
+            case 5: case 6:
+                hg = WEAPON_TIER_5.get(ran.nextInt(WEAPON_TIER_5.size()));
+                break;
+            default:
+                hg = WEAPON_TIER_0.get(ran.nextInt(WEAPON_TIER_0.size()));
+        }
+        return hg;
+    }
+    public static void initWeapon() {
+        try {
+            Scanner sc = new Scanner(new File("src/weapon.txt"));
+            String weaponName;
+            int tierCounter = 0;
+            while (sc.hasNextLine()) {
+                weaponName = sc.nextLine().trim();
+                if (weaponName.equals("Tier")) {
+                    tierCounter++;
+                } else {
+                    switch (tierCounter) {
+                        case 0:
+                            WEAPON_TIER_0.add(new item.weapon(weaponName.split(",")));
+                            break;
+                        case 1:
+                            WEAPON_TIER_1.add(new item.weapon(weaponName.split(",")));
+                            break;
+                        case 2:
+                            WEAPON_TIER_2.add(new item.weapon(weaponName.split(",")));
+                            break;
+                        case 3:
+                            WEAPON_TIER_3.add(new item.weapon(weaponName.split(",")));
+                            break;
+                        case 4:
+                            WEAPON_TIER_4.add(new item.weapon(weaponName.split(",")));
+                            break;
+                        case 5:
+                            WEAPON_TIER_5.add(new item.weapon(weaponName.split(",")));
+                            break;
+                    }
+                }
+            }
+        } catch (FileNotFoundException fnfe) {
+            System.err.println("The file armor.txt.txt is not found in the src folder.");
+        }
+    }
+    public static void initArmor() {
+        try {
+            Scanner sc = new Scanner(new File("src/headgear.txt"));
+            String armorName;
+            int tierCounter = 0;
+            while (sc.hasNextLine()) {
+                armorName = sc.nextLine().trim();
+                if (armorName.equals("Tier")) {
+                    tierCounter++;
+                } else {
+                    switch (tierCounter) {
+                        case 0:
+                            ARMOR_TIER_0.add(new item.armor(armorName.split(",")));
+                            break;
+                        case 1:
+                            ARMOR_TIER_1.add(new item.armor(armorName.split(",")));
+                            break;
+                        case 2:
+                            ARMOR_TIER_2.add(new item.armor(armorName.split(",")));
+                            break;
+                        case 3:
+                            ARMOR_TIER_3.add(new item.armor(armorName.split(",")));
+                            break;
+                        case 4:
+                            ARMOR_TIER_4.add(new item.armor(armorName.split(",")));
+                            break;
+                        case 5:
+                            ARMOR_TIER_5.add(new item.armor(armorName.split(",")));
+                            break;
+                    }
+                }
+            }
+        } catch (FileNotFoundException fnfe) {
+            System.err.println("The file armor.txt.txt is not found in the src folder.");
+        }
+    }
+
+    private static final List<item.armor> ARMOR_TIER_0 = new ArrayList<>();
+    private static final List<item.armor> ARMOR_TIER_1 = new ArrayList<>();
+    private static final List<item.armor> ARMOR_TIER_2 = new ArrayList<>();
+    private static final List<item.armor> ARMOR_TIER_3 = new ArrayList<>();
+    private static final List<item.armor> ARMOR_TIER_4 = new ArrayList<>();
+    private static final List<item.armor> ARMOR_TIER_5 = new ArrayList<>();
+
+    public static item.armor getRandomArmor(player player) {
+        Random ran = new Random();
+        item.armor hg;
+        switch (player.level/10) {
+            case 0:
+                hg = ARMOR_TIER_0.get(ran.nextInt(ARMOR_TIER_0.size()));
+                break;
+            case 1:
+                hg = ARMOR_TIER_1.get(ran.nextInt(ARMOR_TIER_1.size()));
+                break;
+            case 2:
+                hg = ARMOR_TIER_2.get(ran.nextInt(ARMOR_TIER_2.size()));
+                break;
+            case 3:
+                hg = ARMOR_TIER_3.get(ran.nextInt(ARMOR_TIER_3.size()));
+                break;
+            case 4:
+                hg = ARMOR_TIER_4.get(ran.nextInt(ARMOR_TIER_4.size()));
+                break;
+            case 5: case 6:
+                hg = ARMOR_TIER_5.get(ran.nextInt(ARMOR_TIER_5.size()));
+                break;
+            default:
+                hg = ARMOR_TIER_0.get(ran.nextInt(ARMOR_TIER_0.size()));
+        }
+        return hg;
+    }
+    private static final List<item.headgear> HEADGEAR_TIER_0 = new ArrayList<>();
+    private static final List<item.headgear> HEADGEAR_TIER_1 = new ArrayList<>();
+    private static final List<item.headgear> HEADGEAR_TIER_2 = new ArrayList<>();
+    private static final List<item.headgear> HEADGEAR_TIER_3 = new ArrayList<>();
+    private static final List<item.headgear> HEADGEAR_TIER_4 = new ArrayList<>();
+    private static final List<item.headgear> HEADGEAR_TIER_5 = new ArrayList<>();
+
+    public static void initHeadGear() {
+        try {
+            Scanner sc = new Scanner(new File("src/headgear.txt"));
+            String headgearName;
+            int tierCounter = 0;
+            while (sc.hasNextLine()) {
+                headgearName = sc.nextLine().trim();
+                if (headgearName.equals("Tier")) {
+                    tierCounter++;
+                } else {
+                    switch (tierCounter) {
+                        case 0:
+                            HEADGEAR_TIER_0.add(new item.headgear(headgearName.split(",")));
+                            break;
+                        case 1:
+                            HEADGEAR_TIER_1.add(new item.headgear(headgearName.split(",")));
+                            break;
+                        case 2:
+                            HEADGEAR_TIER_2.add(new item.headgear(headgearName.split(",")));
+                            break;
+                        case 3:
+                            HEADGEAR_TIER_3.add(new item.headgear(headgearName.split(",")));
+                            break;
+                        case 4:
+                            HEADGEAR_TIER_4.add(new item.headgear(headgearName.split(",")));
+                            break;
+                        case 5:
+                            HEADGEAR_TIER_5.add(new item.headgear(headgearName.split(",")));
+                            break;
+                    }
+                }
+            }
+        } catch (FileNotFoundException fnfe) {
+            System.err.println("The file headgear.txt.txt is not found in the src folder.");
+        }
+    }
+
+    public static item.headgear getRandomHeadGear(player player) {
+        Random ran = new Random();
+        item.headgear hg;
+        switch (player.level/10) {
+            case 0:
+                hg = HEADGEAR_TIER_0.get(ran.nextInt(HEADGEAR_TIER_0.size()));
+                break;
+            case 1:
+                hg = HEADGEAR_TIER_1.get(ran.nextInt(HEADGEAR_TIER_1.size()));
+                break;
+            case 2:
+                hg = HEADGEAR_TIER_2.get(ran.nextInt(HEADGEAR_TIER_2.size()));
+                break;
+            case 3:
+                hg = HEADGEAR_TIER_3.get(ran.nextInt(HEADGEAR_TIER_3.size()));
+                break;
+            case 4:
+                hg = HEADGEAR_TIER_4.get(ran.nextInt(HEADGEAR_TIER_4.size()));
+                break;
+            case 5: case 6:
+                hg = HEADGEAR_TIER_5.get(ran.nextInt(HEADGEAR_TIER_5.size()));
+                break;
+            default:
+                hg = HEADGEAR_TIER_0.get(ran.nextInt(HEADGEAR_TIER_0.size()));
+        }
+        return hg;
+    }
+
 
 }
+

@@ -172,7 +172,6 @@ public class item {
             this.wisReq = wisReq;
             this.strReq = strReq;
             this.dexReq = dexReq;
-            this.protection = 0;
         }
         public int getSlot() {
             return this.equipSlot;
@@ -194,6 +193,17 @@ public class item {
             super(name, description, value, wisMod, strMod, dexMod);
             this.damage = damage;
             this.condition = condition;
+            this.equipSlot = 2;
+            this.location = "right";
+        }
+
+        public weapon(String[] params) {
+            // parse string
+            super(params[0], params[1], Integer.getInteger(params[2]), Integer.getInteger(params[3]),
+                    Integer.getInteger(params[4]), Integer.getInteger(params[5]));
+            System.out.println(params.length);
+            this.damage = Integer.getInteger(params[6]);
+            this.condition = Integer.getInteger(params[7]);
             this.equipSlot = 2;
             this.location = "right";
         }
@@ -232,7 +242,7 @@ public class item {
          *
          * @param params array of string values in order
          */
-        private armor(String[] params) {
+        public armor(String[] params) {
             // parse string
             super(params[0],params[1],Integer.getInteger(params[2]),Integer.getInteger(params[3]),
                     Integer.getInteger(params[4]),Integer.getInteger(params[5]));
@@ -348,8 +358,7 @@ public class item {
             this.location = "left";
         }
 
-        /**
-         * Create headgear object from String array.
+        /*** Create headgear object from String array.
          *
          * @param params array of string values in order
          */
