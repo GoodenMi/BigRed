@@ -63,7 +63,7 @@ public class player{
             this.dex = 6;
             this.wisdom = 10;
             this.hp = 15;
-            this.mana = 12;
+            this.mana = 20;
             this.equipped[0] = new item.armor("Simple robes","The cloth robes of a mage",2,30,100,5,0,0);
             this.equipped[1] = new item.headgear("mage hood", "A cloth hood",1,15,100,3,0,0);
             this.equipped[2] = new item.weapon("Staff","A wooden staff.",3,10,100,3,0,0);

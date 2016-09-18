@@ -47,10 +47,15 @@ public class BigRed {
                     one.exp+=two.expAwarded;
                     return two.expAwarded;
                 }
-                System.out.println("press enter to continue;");
+                System.out.println(one.name+ " has " + playerHp +"/"+one.hp+" hp left.");
+                System.out.println(two.name+ " has " + enemyHp +"/"+two.hp+" hp left.");
+                System.out.println("Press enter to continue;");
                 input.nextLine();
             }else{
                 System.out.println(one.name+ " missed.");
+                System.out.println(one.name+ " has " + playerHp +"/"+one.hp+" hp left.");
+                System.out.println(two.name+ " has " + enemyHp +"/"+two.hp+" hp left.");
+                System.out.println("Press enter to continue.");
                 input.nextLine();
             }
             int enemyAttack = two.hitChance(false);
@@ -62,10 +67,15 @@ public class BigRed {
                     System.out.println(one.name + " was killed by "+two.name);
                     break;
                 }
-                System.out.println("press enter to continue;");
+                System.out.println(one.name+ " has " + playerHp +"/"+one.hp+" hp left.");
+                System.out.println(two.name+ " has " + enemyHp +"/"+two.hp+" hp left.");
+                System.out.println("Press enter to continue;");
                 input.nextLine();
             }else{
                 System.out.println(two.name+ " missed.");
+                System.out.println(one.name+ " has " + playerHp +"/"+one.hp+" hp left.");
+                System.out.println(two.name+ " has " + enemyHp +"/"+two.hp+" hp left.");
+                System.out.println("Press enter to continue;");
                 input.nextLine();
             }
 
@@ -108,7 +118,7 @@ public class BigRed {
             }else if(choice.equals("einv")) {
                 one.printEquipableInv();
             } else if(choice.equals("fight")){
-                npc.enemy.goblin two = new npc.enemy.goblin("test goblin.", "short green. angry", 0,30,one);
+                npc.enemy.goblin two = new npc.enemy.goblin("test goblin ", "short green. angry", 0,30,one);
                 tempexp -= battleLoop(one,two);
 
             }else{

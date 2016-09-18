@@ -5,22 +5,18 @@ public class dungeon {
 	int size;
 	int numMonsters;
 	int currentLevel;
-	int loot;
-	item itemLoot;
-	public dungeon(String name, String location, int size, int numMonsters, int currentLevel, int loot, item itemLoot){
+    int loot;
+	public dungeon(String name, String location, int size, int numMonsters, int currentLevel, int loot){
 		this.name=name;
 		this.location=location;
 		this.size=size;
 		this.numMonsters=numMonsters;
-		this.currentLevel=0;
-		this.loot=loot;
-		this.itemLoot=item.getName();
+		this.currentLevel=currentLevel;
+		this.loot = loot;
 	}
 	
 	public void killedMonster(){
-		if (){
-			numMonsters--;
-		}
+
 	}
 		
 	public void increaseLevel(){
@@ -33,23 +29,14 @@ public class dungeon {
 		//TODO exit the dungeon
 	}
 	
-	public boolean completed();
-		if (numMonsters==0 && curentLevel==size){
-			//TODO add item to invitory
-			player.gold=player.gold+loot;
-			return true;
-		}
-	
-	/* getter functions*/
-	
-	public getSize(){
-		return this.size;
-	}
-	
-	public getLevel(){
-		return this.currentLevel;
-	}
-	
+	public boolean completed(player one) {
+        if (numMonsters == 0 && this.currentLevel == size) {
+            //TODO add item to invitory
+            one.gold += this.loot;
+            return true;
+        }
+        return false;
+    }
 	
 	public String getName() {
         return this.name;

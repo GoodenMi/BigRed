@@ -36,11 +36,11 @@ public class npc {
         public static class goblin extends enemy {
             public goblin(String name, String description, int karma, int exp, player one) {
                 super(name, description, karma, exp, one);
-                this.dex = 6 + (this.level*2);
+                this.dex = 6 + (this.level/2);
                 this.strength = 5 + (this.level / 2);
                 this.protection = 8;
                 this.wisdom = 3;
-                this.hp = 50 + (this.level*10);
+                this.hp = 20 + (this.level*5);
                 this.damage = 4;
             }
 
