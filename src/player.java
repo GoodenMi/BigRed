@@ -61,7 +61,7 @@ public class player{
             this.playerClass = "Mage";
             this.strength = 5;
             this.dex = 6;
-            this.wisdom = 10;
+            this.wisdom = 17;
             this.hp = 15;
             this.mana = 20;
             this.equipped[0] = new item.armor("Simple robes","The cloth robes of a mage",2,30,100,5,0,0);
@@ -71,15 +71,15 @@ public class player{
             this.equipInventory[1]= this.equipped[1];
             this.equipInventory[2]= this.equipped[2];
             this.defence = this.equipped[0].protection + this.equipped[1].protection;
-            this.damage = this.equipped[2].damage;
-        } else if(choice.equals("Rouge")){
-            this.playerClass = "Rouge";
+            this.damage = 10;
+        } else if(choice.equals("Rogue")){
+            this.playerClass = "Rogue";
             this.strength = 7;
             this.dex = 12;
             this.wisdom = 7;
             this.hp = 20;
             this.mana = 2;
-            this.equipped[0] = new item.armor("Leather armor", " light armor made of cowhide",5,50,100,0,0,3);
+            this.equipped[0] = new item.equippable.armor("Leather armor", " light armor made of cowhide",5,50,100,0,0,3);
             this.equipped[1] = new item.headgear("Cloak", "A smiple cloth cloak.",0,20,100,0,0,5);
             this.equipped[2] = new item.weapon("Dagger","Dull Iron dagger",3,20,100,0,0,2);
             this.equipped[3] = new item.weapon("Dagger","Dull Iron dagger",3,20,100,0,0,2);
@@ -180,7 +180,7 @@ public class player{
         int hitChance;
         Random rand = new Random();
         int x = rand.nextInt(20)+1;
-        if(this.playerClass == "Mage" && isMagic==true){
+        if(this.playerClass == "Mage"){
             hitChance = this.wisdom*x;
         }else {
             hitChance = this.dex * x;
@@ -215,6 +215,7 @@ public class player{
     }
     public void levelUp(){
         this.level++;
+        this.damage+=3;
         Scanner input = new Scanner(System.in);
         System.out.println("Congratulations! You have leveled up! You have 5 skill points to use. " +
                 "Where would you like to use them?");
