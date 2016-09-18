@@ -1,0 +1,12 @@
+Iron Kite Shield,A favorite of knights,7,80,100,5,10,5
+Tier
+Steel Kite Shield,A favorite of knights,13,180,100,6,15,7
+Tier
+Silver Kite Shield,A favorite of knights,18,260,100,8,20,10
+Tier
+Gold Kite Shield,A favorite of knights,23,340,100,10,25,13
+Tier
+Platinum Kite Shield,A favorite of knights,28,420,100,13,45,15
+Tier
+Diamond Kite Shield,You lift bro?,38,600,100,23,60,25
+Tier
