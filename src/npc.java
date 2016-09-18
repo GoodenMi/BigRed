@@ -36,11 +36,11 @@ public class npc {
         public static class goblin extends enemy {
             public goblin(String name, String description, int karma, int exp, player one) {
                 super(name, description, karma, exp, one);
-                this.dex = 6 + (this.level*2);
+                this.dex = 6 + (this.level * 2);
                 this.strength = 5 + (this.level / 2);
                 this.protection = 8;
                 this.wisdom = 3;
-                this.hp = 50 + (this.level*10);
+                this.hp = 50 + (this.level * 10);
                 this.damage = 4;
             }
 
@@ -52,18 +52,18 @@ public class npc {
                 return hitChance;
             }
         }
+    }
 
-        //public class Shopkeeper extends npc {
-        //item[] Shop;
-        //int itemsNumber;
-        //int goldOnHand;
+    public class Shopkeeper extends npc {
+        item[] Shop;
+        int itemsNumber;
+        int goldOnHand;
 
-        //public Shopkeeper(String name, String description, String[] talkingTree, int karma, int talkingPoints, int itemsNumber, int goldOnHand) {
-        //super(name, description, talkingTree, karma, talkingPoints);
-        //this.Shop = new item[itemsNumber];
-        //this.goldOnHand = goldOnHand;
-        //  }
-        //}
-
+        public Shopkeeper(String name, String description, int karma, int itemsNumber, int goldOnHand) {
+            super(name, description, karma);
+            this.Shop = new item[itemsNumber];
+            this.itemsNumber = itemsNumber;
+            this.goldOnHand = goldOnHand;
+        }
     }
 }

@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -14,21 +15,21 @@ public abstract class pointofinterest {
     private static final List<String> TEMPLE_NAMES = new ArrayList<>();
     private static final List<String> ARENA_NAMES = new ArrayList<>();
 
-    private String name;
-    private String description;
-    private List<pointofinterest> neighbors;
-    private tile[][] tiles;
+    protected String name;
+    protected String description;
+    protected List<pointofinterest> neighbors;
+    protected List<npc> npcs;
+    protected List<item> items;
 
-    public pointofinterest(String name, int tilesX, int tilesY, String description) {
-        this.name = name;
-        this.description = description;
-        this.neighbors = new ArrayList<>();
-        tile[][] area = new tile[tilesX][tilesY];
-        for (int i = 0; i < tilesX; i++) {
-            for (int j = 0; j < tilesY; j++) {
-                //area[i][j] = new tile();
-            }
+    public pointofinterest() {
+        if (SHOP_NAMES.size() == 0) {
+            initPointOfInterest();
         }
+        this.neighbors = new ArrayList<>();
+        this.npcs = new ArrayList<>();
+        // generate npcs
+        this.items = new ArrayList<>();
+        // generate npcs
     }
 
     /**
@@ -87,38 +88,34 @@ public abstract class pointofinterest {
         return this.neighbors;
     }
 
-    public tile[][] getTiles() {
-        return this.tiles;
-    }
+    public List<item> getItems() { return this.items; }
+
+    public List<npc> getNpcs() { return this.npcs; }
 
     /** Child classes */
 
     public class Shop extends pointofinterest { //TODO
 
-        public Shop(String name, int tilesX, int tilesY, String description) {
-            super(name, tilesX, tilesY, description);
+        public Shop() {
+            super();
+            Random ran = new Random();
+            this.name = SHOP_NAMES.get(ran.nextInt(SHOP_NAMES.size()));
+            //this.npcs.add(new npc.Shopkeeper());
+            //this.description
         }
     }
 
     public class Tavern extends pointofinterest { //TODO
 
-        public Tavern(String name, int tilesX, int tilesY, String description) {
-            super(name, tilesX, tilesY, description);
-        }
     }
 
     public class Temple extends pointofinterest { //TODO
 
-        public Temple(String name, int tilesX, int tilesY, String description) {
-            super(name, tilesX, tilesY, description);
-        }
     }
 
     public class Arena extends pointofinterest { //TODO
 
-        public Arena(String name, int tilesX, int tilesY, String description) {
-            super(name, tilesX, tilesY, description);
-        }
+
     }
 }
 

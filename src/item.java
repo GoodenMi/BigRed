@@ -141,7 +141,7 @@ public class item {
                     }
                 }
             } catch (FileNotFoundException fnfe) {
-                System.err.println("The file armor.txt.txt is not found in the resources folder.");
+                System.err.println("The file armor.txt.txt is not found in the src folder.");
             }
         }
 
@@ -243,7 +243,7 @@ public class item {
                     }
                 }
             } catch (FileNotFoundException fnfe) {
-                System.err.println("The file headgear.txt.txt is not found in the resources folder.");
+                System.err.println("The file headgear.txt.txt is not found in the src folder.");
             }
         }
 
@@ -276,6 +276,14 @@ public class item {
         }
     }
     public static class shield extends equippable{
+
+        private static final List<shield> SHIELD_TIER_0 = new ArrayList<>();
+        private static final List<shield> SHIELD_TIER_1 = new ArrayList<>();
+        private static final List<shield> SHIELD_TIER_2 = new ArrayList<>();
+        private static final List<shield> SHIELD_TIER_3 = new ArrayList<>();
+        private static final List<shield> SHIELD_TIER_4 = new ArrayList<>();
+        private static final List<shield> SHIELD_TIER_5 = new ArrayList<>();
+
         int equipSlot;
         int condition;
         int protection;
@@ -286,6 +294,86 @@ public class item {
             this.condition = condition;
             this.equipSlot = 3;
             this.location = "left";
+        }
+
+        /**
+         * Create headgear object from String array.
+         *
+         * @param params array of string values in order
+         */
+        private shield(String[] params) {
+            // parse string
+            super(params[0],params[1],Integer.getInteger(params[2]),Integer.getInteger(params[3]),
+                    Integer.getInteger(params[4]),Integer.getInteger(params[5]));
+            this.protection = Integer.getInteger(params[6]);
+            this.condition = Integer.getInteger(params[7]);
+            this.equipSlot = 3;
+            this.location = "left";
+        }
+
+        public void initShield() {
+            try {
+                Scanner sc = new Scanner(new File("src/headgear.txt"));
+                String shieldName;
+                int tierCounter = 0;
+                while (sc.hasNextLine()) {
+                    shieldName = sc.nextLine().trim();
+                    if (shieldName.equals("Tier")) {
+                        tierCounter++;
+                    } else {
+                        switch (tierCounter) {
+                            case 0:
+                                SHIELD_TIER_0.add(new shield(shieldName.split(",")));
+                                break;
+                            case 1:
+                                SHIELD_TIER_1.add(new shield(shieldName.split(",")));
+                                break;
+                            case 2:
+                                SHIELD_TIER_2.add(new shield(shieldName.split(",")));
+                                break;
+                            case 3:
+                                SHIELD_TIER_3.add(new shield(shieldName.split(",")));
+                                break;
+                            case 4:
+                                SHIELD_TIER_4.add(new shield(shieldName.split(",")));
+                                break;
+                            case 5:
+                                SHIELD_TIER_5.add(new shield(shieldName.split(",")));
+                                break;
+                        }
+                    }
+                }
+            } catch (FileNotFoundException fnfe) {
+                System.err.println("The file shield.txt.txt is not found in the src folder.");
+            }
+        }
+
+        public shield getShield(player player) {
+            Random ran = new Random();
+            shield hg;
+            switch (player.level/10) {
+                case 0:
+                    hg = SHIELD_TIER_0.get(ran.nextInt(SHIELD_TIER_0.size()));
+                    break;
+                case 1:
+                    hg = SHIELD_TIER_1.get(ran.nextInt(SHIELD_TIER_1.size()));
+                    break;
+                case 2:
+                    hg = SHIELD_TIER_2.get(ran.nextInt(SHIELD_TIER_2.size()));
+                    break;
+                case 3:
+                    hg = SHIELD_TIER_3.get(ran.nextInt(SHIELD_TIER_3.size()));
+                    break;
+                case 4:
+                    hg = SHIELD_TIER_4.get(ran.nextInt(SHIELD_TIER_4.size()));
+                    break;
+                case 5: case 6:
+                    hg = SHIELD_TIER_5.get(ran.nextInt(SHIELD_TIER_5.size()));
+                    break;
+                default:
+                    hg = SHIELD_TIER_0.get(ran.nextInt(SHIELD_TIER_0.size()));
+            }
+            return hg;
         }
     }
     
