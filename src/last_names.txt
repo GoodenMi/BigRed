@@ -11,7 +11,7 @@ Hupetri
 Delsemme
 Erndt
 Duyking
-Séguier
+Seguier
 Schone
 Bonizo
 Weiss
@@ -37,7 +37,7 @@ Haldron
 Carrara
 Prignano
 Cornelis
-Gögler
+Gugler
 Marin
 Tiemessen
 Makrigiannis

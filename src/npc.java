@@ -41,15 +41,15 @@ public class npc {
      */
     public void initNpc() {
         try {
-            Scanner scf = new Scanner(new File("first_names.txt"));
+            Scanner scf = new Scanner(new File("src/first_names.txt"));
             while (scf.hasNextLine()) {
                 NPC_FIRST_NAMES.add(scf.nextLine().trim());
             }
-            Scanner scl = new Scanner(new File("last_names.txt"));
+            Scanner scl = new Scanner(new File("src/last_names.txt"));
             while (scl.hasNextLine()) {
                 NPC_LAST_NAMES.add(scl.nextLine().trim());
             }
-            Scanner sct = new Scanner(new File("people.txt"));
+            Scanner sct = new Scanner(new File("src/people.txt"));
             while (sct.hasNextLine()) {
                 NPC_TITLES.add(sct.nextLine().trim());
             }
