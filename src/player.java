@@ -10,6 +10,7 @@ public class player{
     int strength;
     int wisdom;
     int hp;
+    int exp;
     int mana;
     int defence;
     int inventorySize;
@@ -30,6 +31,7 @@ public class player{
      */
     public player(String choice, String name){
         this.level = 1;
+        this.exp = 0;
         this.name = name;
         this.inventory = new item[15];
         this.inventorySize = 15;

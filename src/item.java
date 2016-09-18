@@ -50,6 +50,9 @@ public class item {
             this.equipSlot = 2;
             this.location = "right";
         }
+        public int getSlot() {
+            return this.equipSlot;
+        }
     }
 
     public static class armor extends equippable {
@@ -67,6 +70,10 @@ public class item {
 
         public int getProtection() {
             return this.protection;
+        }
+
+        public int getSlot() {
+            return this.equipSlot;
         }
 
         public void armorStats() {
@@ -89,6 +96,9 @@ public class item {
             this.equipSlot = 1;
             this.location = "Head";
         }
+        public int getSlot() {
+            return this.equipSlot;
+        }
     }
     public static class shield extends equippable{
         int equipSlot;
@@ -101,6 +111,9 @@ public class item {
             this.condition = condition;
             this.equipSlot = 3;
             this.location = "left";
+        }
+        public int getSlot() {
+            return this.equipSlot;
         }
     }
     

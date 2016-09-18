@@ -1,0 +1,26 @@
+Welcome! What would you like to do?
+Is that all?
+Would you like anything else?
+Goodbye!
+
+Prepare for battle!
+Let's battle!
+Die!
+Give me your gold!
+...
+I challenge you to a duel!
+
+Help! Help!
+Can you help me?
+I have a quest for a brave adventurer.
+I need you to do something for me.
+There's monsters nearby. Can you slay them for me?
+Brave adventurer, come hither.
+
+Thanks!
+Well done!
+
+You finished?
+
+
+
