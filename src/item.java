@@ -17,6 +17,7 @@ public class item {
         int dexReq;
         int strReq;
         int protection;
+        int damage;
         int equipSlot;
         String location;
 

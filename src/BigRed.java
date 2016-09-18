@@ -1,6 +1,7 @@
 /**
  * Created by Miles on 9/16/2016.
  */
+import java.util.Random;
 import java.util.Scanner;
 public class BigRed {
     public static void main(String[] args) {
@@ -26,19 +27,63 @@ public class BigRed {
         standardLoop(one);
     }
 
-    public static void battleLoop(player one, npc.enemy.goblin two){
-        while(one.hp > 0 || two.hp>0) {
+    public static int battleLoop(player one, npc.enemy.goblin two){
+        Scanner input = new Scanner(System.in);
+        Random rand = new Random();
+        int playerHp = one.hp;
+        int enemyHp = two.hp;
+        System.out.println("Enemy level: "+ two.level);
+        while(playerHp > 0 || enemyHp>0) {
+            int playerDamage = (one.damage+(one.strength/2))/(rand.nextInt(3)+1);
+            int enemyDamage = (two.damage+ (two.strength/2))/(rand.nextInt(3)+1);
             int playerAttack = one.hitChance(false);
-            int enemyDefence = two.hitChance(false);
-            if()
+            int enemyDefence = two.hitChance(false) +two.protection;
+            if(playerAttack> enemyDefence){
+                enemyHp -= playerDamage;
+                System.out.println(two.name +" was hit for " + playerDamage + " damage.");
+                if(enemyHp <=0){
+                    System.out.println(two.name + " was killed by the player. " + two.expAwarded+ "exp gained for winning.");
+                    System.out.println();
+                    one.exp+=two.expAwarded;
+                    return two.expAwarded;
+                }
+                System.out.println("press enter to continue;");
+                input.nextLine();
+            }else{
+                System.out.println(one.name+ " missed.");
+                input.nextLine();
+            }
+            int enemyAttack = two.hitChance(false);
+            int playerDefence = one.hitChance(false) + one.defence;
+            if(enemyAttack> playerDefence){
+                playerHp-=enemyDamage;
+                System.out.println(one.name+ " was hit for " + enemyDamage + " damage.");
+                if(playerHp <=0){
+                    System.out.println(one.name + " was killed by "+two.name);
+                    break;
+                }
+                System.out.println("press enter to continue;");
+                input.nextLine();
+            }else{
+                System.out.println(two.name+ " missed.");
+                input.nextLine();
+            }
+
         }
+        return 0;
 
     }
 
     public static void standardLoop(player one){
         String choice = " ";
+        int expTillLevelup = 100;
+        int tempexp = 100;
         while(!choice.equals("quit")) {
             Scanner input = new Scanner(System.in);
+            if(tempexp <=0){
+                one.levelUp();
+                tempexp = expTillLevelup* one.level;
+            }
             System.out.println("What would you like to do?");
             System.out.println("Type 'equip' to equip and item. Type 'unequip' to unequip an item.");
             System.out.println("Type 'stats' to display your character's statistics.");
@@ -63,8 +108,9 @@ public class BigRed {
             }else if(choice.equals("einv")) {
                 one.printEquipableInv();
             } else if(choice.equals("fight")){
-                npc.goblin two = new npc.goblin("first", "short green. angry", 0,30,one);
-                battleLoop(one,two);
+                npc.enemy.goblin two = new npc.enemy.goblin("test goblin.", "short green. angry", 0,30,one);
+                tempexp -= battleLoop(one,two);
+
             }else{
                 System.out.println("That is not a valid choice.");
             }

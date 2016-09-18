@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class player{
     int level;
     int dex;
+    int damage;
     int strength;
     int wisdom;
     int hp;
@@ -43,7 +44,7 @@ public class player{
             this.playerClass = "Knight";
             this.strength = 10;
             this.dex = 8;
-            this.hp = 12;
+            this.hp = 30;
             this.wisdom = 5;
             this.mana = 4;
             this.equipped[0]= new item.armor("Iron Plate Mail","Heavy plate armor",10,100,100,0,0,0);
@@ -54,13 +55,14 @@ public class player{
             this.equipInventory[1]= this.equipped[1];
             this.equipInventory[2]= this.equipped[2];
             this.equipInventory[3]= this.equipped[3];
-            this.defence = this.equipped[0].protection + this.equipped[1].protection +this.equipped[2].protection;
+            this.defence = this.equipped[0].protection + this.equipped[1].protection +this.equipped[3].protection;
+            this.damage = 5;
         } else if(choice.equals("Mage")){
             this.playerClass = "Mage";
             this.strength = 5;
             this.dex = 6;
             this.wisdom = 10;
-            this.hp = 5;
+            this.hp = 15;
             this.mana = 12;
             this.equipped[0] = new item.armor("Simple robes","The cloth robes of a mage",2,30,100,5,0,0);
             this.equipped[1] = new item.headgear("mage hood", "A cloth hood",1,15,100,3,0,0);
@@ -69,12 +71,13 @@ public class player{
             this.equipInventory[1]= this.equipped[1];
             this.equipInventory[2]= this.equipped[2];
             this.defence = this.equipped[0].protection + this.equipped[1].protection;
+            this.damage = this.equipped[2].damage;
         } else if(choice.equals("Rouge")){
             this.playerClass = "Rouge";
             this.strength = 7;
             this.dex = 12;
             this.wisdom = 7;
-            this.hp = 8;
+            this.hp = 20;
             this.mana = 2;
             this.equipped[0] = new item.armor("Leather armor", " light armor made of cowhide",5,50,100,0,0,3);
             this.equipped[1] = new item.headgear("Cloak", "A smiple cloth cloak.",0,20,100,0,0,5);
@@ -84,6 +87,8 @@ public class player{
             this.equipInventory[1]= this.equipped[1];
             this.equipInventory[2]= this.equipped[2];
             this.equipInventory[3]= this.equipped[3];
+            this.defence = this.equipped[0].protection + this.equipped[1].protection;
+            this.damage = 6;
         } else{
             System.out.println("That is not a valid class.");
         }
@@ -199,6 +204,7 @@ public class player{
 
     }
     public void levelUp(){
+        this.level++;
         Scanner input = new Scanner(System.in);
         System.out.println("Congratulations! You have leveled up! You have 5 skill points to use. " +
                 "Where would you like to use them?");
