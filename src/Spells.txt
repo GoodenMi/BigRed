@@ -1,0 +1,15 @@
+"Fireball", "A ball of fire",9,2
+"Water Blast","A blast of water",6,1
+"Ice Shards","Shards of Ice",9,2
+"Poison","Deadly Poison",12,3
+
+"Ice Barrage","A barrage of ice",17,5
+"Thunderbolt","Zap",15,4
+"Twister","Creates a twister",22,7
+
+
+"Shadow Blitz","Attack from the darkness",35,20
+"Fire Blast","Fire,fire everywhere",40,25
+"Earthquake","Earthbender",50,35
+
+
