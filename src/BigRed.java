@@ -118,8 +118,8 @@ public class BigRed {
             }else if(choice.equals("einv")) {
                 one.printEquipableInv();
             } else if(choice.equals("fight")){
-                npc.enemy.goblin two = new npc.enemy.goblin("test goblin ", "short green. angry", 0,30,one);
-                tempexp -= battleLoop(one,two);
+                //npc.enemy.goblin two = new npc.enemy.goblin("test goblin ", "short green. angry", 0,30,one);
+                //tempexp -= battleLoop(one,two);
 
             }else{
                 System.out.println("That is not a valid choice.");

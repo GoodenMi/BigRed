@@ -108,7 +108,7 @@ public class item {
             this.location = "chest";
         }
 
-        public void initArmor() {
+        public static void initArmor() {
             try {
                 Scanner sc = new Scanner(new File("src/headgear.txt"));
                 String armorName;
@@ -376,7 +376,7 @@ public class item {
             return hg;
         }
     }
-    
+
     public String getName() {
         return this.name;
     }

@@ -1,19 +1,61 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Created by Miles on 9/17/2016.
  */
 public class npc {
+    private static final List<String> NPC_FIRST_NAMES = new ArrayList<>();
+    private static final List<String> NPC_LAST_NAMES = new ArrayList<>();
+    private static final List<String> NPC_TITLES = new ArrayList<>();
+    private static final int INIT_KARMA = 50;
+
+    private static final List<String> SHOPKEEPER_NAMES = new ArrayList<>();
+    private static final List<String> ENEMY_NAMES = new ArrayList<>();
+
     String name;
     String description;
     String[] talkingTree;
     int karma;
 
-    public npc(String name, String description, int karma) {
-        this.name = name;
-        this.description = description;
-        this.karma = karma;
+    /**
+     * Constructs a random NPC
+     */
+    public npc() {
+        if (NPC_FIRST_NAMES.size() == 0) {
+            initNpc();
+        }
+        this.name = NPC_FIRST_NAMES.get(new Random().nextInt(NPC_FIRST_NAMES.size()))
+                + " " + NPC_LAST_NAMES.get(new Random().nextInt(NPC_LAST_NAMES.size()));
+        this.description = NPC_TITLES.get(new Random().nextInt(NPC_TITLES.size()));
+        this.karma = INIT_KARMA;
 
+    }
+
+    /**
+     * Initializes NPC String Lists
+     */
+    public void initNpc() {
+        try {
+            Scanner scf = new Scanner(new File("first_names.txt"));
+            while (scf.hasNextLine()) {
+                NPC_FIRST_NAMES.add(scf.nextLine().trim());
+            }
+            Scanner scl = new Scanner(new File("last_names.txt"));
+            while (scl.hasNextLine()) {
+                NPC_LAST_NAMES.add(scl.nextLine().trim());
+            }
+            Scanner sct = new Scanner(new File("people.txt"));
+            while (sct.hasNextLine()) {
+                NPC_TITLES.add(sct.nextLine().trim());
+            }
+        }catch (FileNotFoundException fnfe){
+
+        }
     }
 
     public static class enemy extends npc {
@@ -26,16 +68,16 @@ public class npc {
         int expAwarded;
         int damage;
 
-        public enemy(String name, String description, int karma, int expAwarded, player one) {
-            super(name, description, karma);
+        public enemy(int expAwarded, player one) {
+            super();
             Random rand = new Random();
             this.level = one.level + rand.nextInt(2);
             this.expAwarded = expAwarded * this.level;
         }
 
         public static class goblin extends enemy {
-            public goblin(String name, String description, int karma, int exp, player one) {
-                super(name, description, karma, exp, one);
+            public goblin( int exp, player one) {
+                super( exp, one);
                 this.dex = 6 + (this.level/2);
                 this.strength = 5 + (this.level / 2);
                 this.protection = 8;
@@ -59,8 +101,8 @@ public class npc {
         int itemsNumber;
         int goldOnHand;
 
-        public Shopkeeper(String name, String description, int karma, int itemsNumber, int goldOnHand) {
-            super(name, description, karma);
+        public Shopkeeper(String name, int karma, int itemsNumber, int goldOnHand) {
+            super();
             this.Shop = new item[itemsNumber];
             this.itemsNumber = itemsNumber;
             this.goldOnHand = goldOnHand;
