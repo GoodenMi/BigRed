@@ -1,23 +1,18 @@
 Iron Broadsword,A dull Broadsword,5,50,100,5,10,5
 Wooden Staff,A wooden staff,3,10,100,10,5,5
 Iron Dagger,Dull Iron dagger,3,20,100,5,5,10
-
 Iron Longsword,A dull Longsword,8,75,100,6,15,7
 Air Staff, A staff infused with air power,4,75,100,15,6,7
 Steel Dagger,Sharp Steel dagger,5,75,100,6,7,15
-
 Steel Broadsword,A refined Broadsword,10,105,100,8,20,10
 Water Staff, A staff infused with water power,6,105,100,20,8,10
 Silver Dagger,Refined Silver dagger,7,105,100,8,10,20
-
 Steel Longsword,A refined Longsword,13,150,100,10,25,13
 Earth Staff,A staff infused with earthly powers,8,150,100,25,10,13
 Gold Dagger,Shiny Gold dagger,9,150,100,10,13,25
-
 Gold LongSword,Oooooo shiny,25,350,100,13,45,15
 Fire Staff,Burn baby burn,10,350,100,45,13,15
 Platinum Dagger,You don't want one of these in you,13,350,100,13,15,45
-
 Diamond Longsword,Worth more than your life,45,700,100,23,60,25
 Void Staff,Death in a staff,13,700,100,60,23,25
 Diamond Dagger,Worth more than your life,22,700,100,23,25,60

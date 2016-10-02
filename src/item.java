@@ -50,6 +50,12 @@ public class item {
             this.equipSlot = 2;
             this.location = "right";
         }
+        public void weaponStats() {
+            System.out.println(this.name + ": " + this.description + " does " + this.damage + " damage. It's worth " + this.value + " gold coins. Condition: " + this.condition + "/100");
+            System.out.println("It's strength requirement is " + strReq);
+            System.out.println("It's dexterity requirement is " + dexReq);
+            System.out.println("It's wisdom requirement is " + wisReq);
+        }
         public int getSlot() {
             return this.equipSlot;
         }
