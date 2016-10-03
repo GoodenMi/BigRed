@@ -12,6 +12,7 @@ public class BigRed {
     public static ArrayList<item.headgear> headgears;
     public static ArrayList<item.shield> shields;
     public static void main(String[] args) {
+        //commit test
         weapons = loadItems("weapon.txt");
         armors = loadItems("armor.txt");
         headgears = loadItems("headgear.txt");
