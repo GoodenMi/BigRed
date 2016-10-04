@@ -39,7 +39,7 @@ public class player{
         this.equipInventory = new item.equippable[10];
         this.equipInventorySize = 10;
         this.equipped = new item.equippable[5];
-        this.gold = 30;
+        this.gold = 300;
         if(choice.equals("Knight")){
             this.playerClass = "Knight";
             this.strength = 10;
@@ -122,14 +122,20 @@ public class player{
         }
     }
 
-    public void putEItem(item.equippable subject){
-        for(int i=0; i<equipInventorySize; i++){
-            if(equipInventory[i]==null){
+    public boolean putEItem(item.equippable subject) {
+        boolean hasSpace = false;
+        for (int i = 0; i < equipInventorySize; i++) {
+            if (equipInventory[i] == null) {
                 equipInventory[i] = subject;
+                hasSpace = true;
                 break;
             }
         }
-        System.out.println("Your equippable item inventory is full.");
+        if (hasSpace == false) {
+            System.out.println("Your equippable item inventory is full.");
+
+        }
+        return hasSpace;
     }
 
     public item.equippable getEItemInv(String item){

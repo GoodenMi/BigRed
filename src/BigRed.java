@@ -169,23 +169,23 @@ public class BigRed {
 
         }
         return 0;
-
     }
 
-    public static void shopLoop(player one){
-        System.out.println("Welcome to the shop. What items are you looking for?");
-        System.out.println("Type 1 for armor. 2 for weapons. 3 for headgear. 4 for shields.");
+    public static void shopLoop(player one) {
+        System.out.println("Welcome to the shop. What items are you looking for? armors, weapons, shields or headgear?");
+        System.out.println("(Type the name of the category you want to see and hit enter. Type 'quit' to leave the store.)");
         Scanner input = new Scanner(System.in);
-        int shopChoice = input.nextInt();
-        if(shopChoice == 1) {
-            boolean looking = true;
-            while (looking ==true) {
+        ArrayList shop = new ArrayList();
+        String shopChoice = input.nextLine();
+        if (shopChoice.equals("armors")) {
+            boolean lookingA = true;
+            while (lookingA == true) {
                 System.out.println("These are the armors we have in stock.");
                 for (item.armor armor : armors) {
                     System.out.println(armor.name);
                 }
                 System.out.println("Which one would you like to look at?");
-                System.out.println("(Type the name of the armor you want to inspect.)");
+                System.out.println("(Type the name of the item you want to inspect.)");
                 String armorName = input.nextLine();
                 for (item.armor armor : armors) {
                     if (armorName.equals(armor.name)) {
@@ -199,7 +199,10 @@ public class BigRed {
                                 isBuyingLoop = false;
                                 if (one.gold >= armor.value) {
                                     one.gold -= armor.value;
-                                    one.putEItem(armor);
+                                    boolean wasPut = one.putEItem(armor);
+                                    if (wasPut == false) {
+                                        one.gold += armor.value;
+                                    }
                                 } else {
                                     System.out.println("Sorry, you don't have enough gold.");
                                 }
@@ -217,12 +220,67 @@ public class BigRed {
                 System.out.println("(Type 'yes' or 'no')");
                 String isLooking = input.nextLine();
                 boolean isLookingLoop = true;
-                while(isLookingLoop == true) {
+                while (isLookingLoop == true) {
                     if (isLooking.equals("yes")) {
-                        looking = true;
+                        lookingA = true;
                         isLookingLoop = false;
                     } else if (isLooking.equals("no")) {
-                        looking = false;
+                        lookingA = false;
+                        isLookingLoop = false;
+                    } else {
+                        System.out.println("That is not a valid choice. Try again.");
+                    }
+                }
+            }
+        } else if(shopChoice.equals("weapons")){
+            boolean lookingA = true;
+            while (lookingA == true) {
+                System.out.println("These are the weapons we have in stock.");
+                for (item.weapon armor : weapons) {
+                    System.out.println(armor.name);
+                }
+                System.out.println("Which one would you like to look at?");
+                System.out.println("(Type the name of the item you want to inspect.)");
+                String armorName = input.nextLine();
+                for (item.armor armor : armors) {
+                    if (armorName.equals(armor.name)) {
+                        armor.armorStats();
+                        System.out.println("Would you like to buy it?");
+                        System.out.println("(Type 'yes' or 'no'.)");
+                        String answer = input.nextLine();
+                        boolean isBuyingLoop = true;
+                        while (isBuyingLoop == true) {
+                            if (answer.equals("yes")) {
+                                isBuyingLoop = false;
+                                if (one.gold >= armor.value) {
+                                    one.gold -= armor.value;
+                                    boolean wasPut = one.putEItem(armor);
+                                    if (wasPut == false) {
+                                        one.gold += armor.value;
+                                    }
+                                } else {
+                                    System.out.println("Sorry, you don't have enough gold.");
+                                }
+                            } else if (answer.equals("no")) {
+                                System.out.println("No problem!");
+                                isBuyingLoop = false;
+                            } else {
+                                System.out.println("That's not a valid answer. Try again.");
+                                answer = input.nextLine();
+                            }
+                        }
+                    }
+                }
+                System.out.println("Do you still want to look at armor?");
+                System.out.println("(Type 'yes' or 'no')");
+                String isLooking = input.nextLine();
+                boolean isLookingLoop = true;
+                while (isLookingLoop == true) {
+                    if (isLooking.equals("yes")) {
+                        lookingA = true;
+                        isLookingLoop = false;
+                    } else if (isLooking.equals("no")) {
+                        lookingA = false;
                         isLookingLoop = false;
                     } else {
                         System.out.println("That is not a valid choice. Try again.");
@@ -243,7 +301,7 @@ public class BigRed {
                 tempexp = expTillLevelup* one.level;
             }
             System.out.println("What would you like to do?");
-            System.out.println("Type 1 to equip and item. Type 2 to unequip an item.");
+            System.out.println("Type equip to equip and item. Type unequip to unequip an item.");
             System.out.println("Type 3 to display your character's statistics.");
             System.out.println("Type 4 to see your equippable items.");
             System.out.println("Type 5 to battle.");
