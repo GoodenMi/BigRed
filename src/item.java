@@ -11,6 +11,11 @@ public class item {
         this.value = value;
         this.description = description;
     }
+    public int getValue(){return this.value;}
+
+    public String getName(){return this.name;}
+
+    public String getDescription() {return this.description;}
 
     public static class equippable extends item {
         int wisReq;
@@ -122,10 +127,6 @@ public class item {
         public int getSlot() {
             return this.equipSlot;
         }
-    }
-    
-    public String getName() {
-        return this.name;
     }
 
 }
