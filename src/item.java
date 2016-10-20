@@ -111,6 +111,13 @@ public class item {
         public int getSlot() {
             return this.equipSlot;
         }
+
+        public void headgearStats(){
+            System.out.println(this.name + ": " + this.description + " has " + this.protection + "protection. Is worth " + this.value + " gold coins. Condition: " + this.condition + "/100");
+            System.out.println("It's strength requirement is " + strReq);
+            System.out.println("It's dexterity requirement is " + dexReq);
+            System.out.println("It's wisdom requirement is " + wisReq);
+        }
     }
     public static class shield extends equippable{
         int equipSlot;
@@ -126,6 +133,13 @@ public class item {
         }
         public int getSlot() {
             return this.equipSlot;
+        }
+
+        public void shieldStats(){
+            System.out.println(this.name + ": " + this.description + " has " + this.protection + "protection. Is worth " + this.value + " gold coins. Condition: " + this.condition + "/100");
+            System.out.println("It's strength requirement is " + strReq);
+            System.out.println("It's dexterity requirement is " + dexReq);
+            System.out.println("It's wisdom requirement is " + wisReq);
         }
     }
 

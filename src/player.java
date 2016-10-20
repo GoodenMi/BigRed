@@ -148,6 +148,25 @@ public class player{
         }
         return null;
     }
+
+    public void sellItem(String item){
+        boolean wasremoved = false;
+        for(int i = 0; i<this.equipInventorySize; i++){
+            if(this.equipInventory[i]!= null) {
+                if (this.equipInventory[i].name.equals(item)) {
+                    this.gold+=equipInventory[i].value;
+                    this.equipInventory[i] = null;
+                    System.out.println(item+" was removed from your inventory.");
+                    wasremoved = true;
+                    break;
+                }
+            }
+        }
+        if(wasremoved == false){
+            System.out.println("That item is not in your inventory.");
+        }
+    }
+
     public void unequip(String item){
         if(item.equals("chest")){
             if(this.equipped[0]!= null) {

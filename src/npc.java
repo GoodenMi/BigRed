@@ -23,29 +23,31 @@ public class npc {
         int protection;
         int expAwarded;
         int damage;
+        int goldAwarded;
 
-        public enemy(String name, int level, int expAwarded, player one) {
+        public enemy(String name, int level, int expAwarded, int goldAwarded, player one) {
             super(name);
             Random rand = new Random();
             this.level = level;
             this.expAwarded = expAwarded * this.level;
+            this.goldAwarded = goldAwarded * this.level;
         }
 
         public static class knight extends enemy{
-            public knight(String name,int level, int exp, player one){
-                super(name,level, exp,one);
+            public knight(String name,int level, int exp,int gold, player one){
+                super(name,level, exp, gold,one);
                 this.damage = 5 +(this.strength/2 +(this.level));
-                this.dex = 8 +(this.level/2);
-                this.strength = 8 +(this.level*2);
-                this.protection = 10+ (this.level);
+                this.dex = 3 +(this.level/2);
+                this.strength = 3 +(this.level*2);
+                this.protection = 6+ (this.level);
                 this.wisdom = 6;
-                this.hp = 20 + (this.level*5);
+                this.hp = 10 + (this.level*5);
             }
         }
 
         public static class mage extends enemy {
-            public mage(String name, int level, int exp, player one) {
-                super(name,level, exp, one);
+            public mage(String name, int level, int exp, int gold, player one) {
+                super(name,level, exp,gold, one);
                 this.dex = 5 + (this.level);
                 this.strength = 3 + (this.level / 2);
                 this.protection = 8;
