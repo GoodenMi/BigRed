@@ -56,7 +56,7 @@ public class player{
             this.equipInventory[2]= this.equipped[2];
             this.equipInventory[3]= this.equipped[3];
             this.defence = this.equipped[0].protection + this.equipped[1].protection +this.equipped[3].protection;
-            this.damage = 5;
+            this.damage = this.equipped[2].damage;
         } else if(choice.equals("Mage")){
             this.playerClass = "Mage";
             this.strength = 5;
@@ -71,7 +71,7 @@ public class player{
             this.equipInventory[1]= this.equipped[1];
             this.equipInventory[2]= this.equipped[2];
             this.defence = this.equipped[0].protection + this.equipped[1].protection;
-            this.damage = 10;
+            this.damage = this.equipped[2].damage;
         } else if(choice.equals("Rogue")){
             this.playerClass = "Rogue";
             this.strength = 7;
@@ -88,7 +88,7 @@ public class player{
             this.equipInventory[2]= this.equipped[2];
             this.equipInventory[3]= this.equipped[3];
             this.defence = this.equipped[0].protection + this.equipped[1].protection;
-            this.damage = 6;
+            this.damage = this.equipped[2].damage + this.equipped[3].damage;
         } else{
             System.out.println("That is not a valid class.");
         }
@@ -111,11 +111,15 @@ public class player{
                 System.out.println("You already have it equipped.");
             }else if (this.equipped[subject.getSlot()]==null){
                 this.equipped[subject.getSlot()] = subject;
-                System.out.println("you are now wearing " +item);
+                this.damage+= subject.damage;
+                this.defence += subject.protection;
+                System.out.println("you now have the " +item + " equipped");
             } else {
-                unequip(this.equipped[subject.getSlot()].location);
+                unequip(this.equipped[subject.getSlot()].name);
                 this.equipped[subject.getSlot()] = subject;
-                System.out.println("you now have the" + item +" equippped.");
+                this.damage+= subject.damage;
+                this.defence += subject.protection;
+                System.out.println("you now have the " + item +" equipped.");
             }
         } else{
             System.out.println("That Item is not in your inventory.");
@@ -168,47 +172,54 @@ public class player{
     }
 
     public void unequip(String item){
-        if(item.equals("chest")){
-            if(this.equipped[0]!= null) {
+        boolean isEquipped = false;
+        if(this.equipped[0]!= null) {
+            if (item.equals(this.equipped[0].name)) {
+                isEquipped = true;
                 System.out.println(this.equipped[0].name + " removed.");
+                this.defence -= this.equipped[0].protection;
                 this.equipped[0] = null;
-            } else{
-                System.out.println("Chest armor is already removed.");
             }
-        } else if(item.equals("head")){
-            if(this.equipped[1]!= null) {
-                System.out.println(this.equipped[1].name + " removed.");
-                this.equipped[1] = null;
-            } else{
-                System.out.println("Head armor is already removed.");
-            }
-        } else if(item.equals("right")){
-            if(this.equipped[2]!=null) {
-                System.out.println(this.equipped[2].name + " removed.");
-                this.equipped[2] = null;
-            }else{
-                System.out.println("Your right hand is already free.");
-            }
-        } else if(item.equals("left")){
-            if(this.equipped[3] != null) {
-                System.out.println(this.equipped[3].name + " removed.");
-                this.equipped[3] = null;
-            } else{
-                System.out.println("Your left hand is already free.");
-            }
-        }else{
-            System.out.println("That is not a valid option");
         }
-    }
+        if(this.equipped[1]!= null) {
+            if (item.equals(this.equipped[1].name)) {
+                isEquipped = true;
+                System.out.println(this.equipped[1].name + " removed.");
+                this.defence -= this.equipped[1].protection;
+                this.equipped[1] = null;
+            }
+        }
+        if (this.equipped[2] != null) {
+            if (item.equals(this.equipped[2].name)) {
+                isEquipped = true;
+                System.out.println(this.equipped[2].name + " removed.");
+                this.damage -= this.equipped[2].damage;
+                this.defence -= this.equipped[2].protection;
+                this.equipped[2] = null;
+            }
+        }
+        if (this.equipped[3] != null) {
+            if (item.equals(this.equipped[3].name)) {
+                isEquipped = true;
+                System.out.println(this.equipped[3].name + " removed.");
+                this.damage -= this.equipped[3].damage;
+                this.defence -= this.equipped[3].protection;
+                this.equipped[3] = null;
+            }
+        }
+        if(isEquipped ==false){
+            System.out.println("That item is not equipped");
+        }
+
+        }
 
     public int hitChance(boolean isMagic){
         int hitChance;
         Random rand = new Random();
-        int x = rand.nextInt(20)+1;
         if(this.playerClass == "Mage"){
-            hitChance = this.wisdom*x;
+            hitChance = this.wisdom*(rand.nextInt(20) + 1)+ this.level* 2;
         }else {
-            hitChance = this.dex * x;
+            hitChance = this.dex*(rand.nextInt(20) + 1)+ this.level* 2;
         }
         return hitChance;
     }
@@ -219,6 +230,8 @@ public class player{
     public void printStats(){
         System.out.println("Your name is "+ this.name);
         System.out.println("Your level is: " + this.level);
+        System.out.println("You have " + this.gold + " gold");
+        System.out.println("Your base damage is "+ this.damage);
         System.out.println("Your hp is: " + this.hp);
         System.out.println("Your mana is: " + this.mana);
         System.out.println("Your strength is: " + this.strength);

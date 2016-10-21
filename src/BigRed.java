@@ -67,6 +67,8 @@ public class BigRed {
                     item.shield shield = new item.shield(itemVals[0], itemVals[1], Integer.parseInt(itemVals[2]), Integer.parseInt(itemVals[3]),
                             Integer.parseInt(itemVals[4]), Integer.parseInt(itemVals[5]), Integer.parseInt(itemVals[6]), Integer.parseInt(itemVals[7]));
                     items.add(shield);
+                } else if(filename == "enemies"){
+                    ()
                 }
             }
         } catch (Exception e){}
@@ -84,26 +86,27 @@ public class BigRed {
             int enemyDamage = (two.damage+ (two.strength/2))/(rand.nextInt(3)+1);
             int playerAttack = one.hitChance(false);
             int enemyDefence = two.hitChance(false) +two.protection;
-            if(playerAttack> enemyDefence){
+            if(playerAttack> enemyDefence) {
                 enemyHp -= playerDamage;
-                System.out.println(two.name +" was hit for " + playerDamage + " damage.");
-                if(enemyHp <=0){
-                    System.out.println(two.name + " was killed by the player. " + two.expAwarded+ "exp gained for winning.");
+                System.out.println(two.name + " was hit for " + playerDamage + " damage.");
+                if (enemyHp <= 0) {
+                    System.out.println(two.name + " was killed by the player. " + two.expAwarded + "exp and " + two.goldAwarded + " awarded for winning.");
                     System.out.println();
-                    one.exp+=two.expAwarded;
+                    one.exp += two.expAwarded;
+                    one.gold += two.goldAwarded;
+                    System.out.println("Press enter to continue.");
+                    input.nextLine();
                     return two.expAwarded;
                 }
-                System.out.println(one.name+ " has " + playerHp +"/"+one.hp+" hp left.");
-                System.out.println(two.name+ " has " + enemyHp +"/"+two.hp+" hp left.");
-                System.out.println("Press enter to continue;");
-                input.nextLine();
+            } else{
+                System.out.println(one.name + " Missed.");
             }
+            System.out.println(one.name+ " has " + playerHp +"/"+one.hp+" hp left.");
+            System.out.println(two.name+ " has " + enemyHp +"/"+two.hp+" hp left.");
+            System.out.println("Press enter to continue;");
+            input.nextLine();
             if(one.playerClass.equals("Rogue")) {
-                if(one.playerClass.equals("Mage")){
-                    playerDamage = (one.damage+(one.strength/2))/(rand.nextInt(5)+1)+(one.mana/2);
-                }else {
-                    playerDamage = (one.damage + (one.strength / 2))/(rand.nextInt(3) + 1);
-                }
+                 playerDamage = (one.damage + (one.strength / 2))/(rand.nextInt(3) + 1)/2;
                  enemyDamage = (two.damage+ (two.strength/2))/(rand.nextInt(3)+1);
                  playerAttack = one.hitChance(false);
                  enemyDefence = two.hitChance(false) +two.protection;
@@ -338,7 +341,7 @@ public class BigRed {
                     }
                 }
             }
-            System.out.println("Do you still want to look at armor?");
+            System.out.println("Do you still want to look at headgear?");
             System.out.println("(Type 'yes' or 'no')");
             String isLooking = input.nextLine();
             boolean isLookingLoop = true;
@@ -422,6 +425,7 @@ public class BigRed {
             Scanner input = new Scanner(System.in);
             if(tempexp <=0){
                 one.levelUp();
+                expTillLevelup+=expTillLevelup*one.level;
                 tempexp = expTillLevelup* one.level;
             }
             System.out.println("What would you like to do?");
@@ -436,27 +440,39 @@ public class BigRed {
                 System.out.println("What would you like to equip?");
                 choice = input.nextLine();
                 one.equip(choice);
+                System.out.println("Press enter to continue.");
+                input.nextLine();
             } else if(action.equals("unequip")){
                 System.out.println("What would you like to unequip.");
                 choice = input.nextLine();
                 one.unequip(choice);
+                System.out.println("Press enter to continue.");
+                input.nextLine();
             } else if (action.equals("stats")){
                 one.printStats();
+                System.out.println("Press enter to continue.");
+                input.nextLine();
             }else if(action.equals("quit")) {
                 System.out.println("All done! Bye!");
                 System.exit(0);
             }else if(action.equals("inventory")) {
                 one.printEquipableInv();
+                System.out.println("Press enter to continue.");
+                input.nextLine();
             }else if(action.equals("battle")){
                 System.out.println("What level enemy do you want to fight?");
                 System.out.println("You get 20exp and 50 gold per level.");
                 int opponent = input.nextInt();
-                npc.enemy two = new npc.enemy.knight("Knight", opponent, 20, 50, one);
-                tempexp -= battleLoop(one,two);
-            }else if(action.equals("battle")){
+                //npc two = new npc.enemy();
+                //tempexp -= battleLoop(one,two);
+            }else if(action.equals("shop")){
                 shopLoop(one);
+                System.out.println("Press enter to continue.");
+                input.nextLine();
             } else{
                 System.out.println("That is not a valid choice.");
+                System.out.println("Press enter to continue.");
+                input.nextLine();
             }
         }
     }

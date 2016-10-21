@@ -22,6 +22,7 @@ public class item {
         int dexReq;
         int strReq;
         int protection;
+        int damage;
         int equipSlot;
         String location;
 
@@ -30,6 +31,7 @@ public class item {
             this.wisReq = wisReq;
             this.strReq = strReq;
             this.dexReq = dexReq;
+            this.damage = 0;
             this.protection = 0;
         }
         public int getSlot() {
@@ -70,7 +72,6 @@ public class item {
         int protection;
         int condition;
         int equipSlot;
-        int damage;
         String location;
         public armor(String name, String description, int protection, int value, int condition, int wisReq, int strReq, int dexReq) {
             super(name, description, value, wisReq, dexReq, strReq);
