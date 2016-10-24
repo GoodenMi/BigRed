@@ -1,4 +1,5 @@
-Knight,a simple knight,50,20,15,10,8,5
-Goblin,angry and green,20,10,8,7,11,4
-Rat,ewww,10,5,3,3,3,3
-Wolf,Dangerous doggo,15,10,6,11,14,5
+Knight,a simple knight,50,20,10,3,5,2
+Goblin,angry and green,20,10,2,2,6,2
+Rat,ewww,10,5,2,2,2,2
+Wolf,Dangerous doggo,15,10,2,5,7,1
+Werewolf, Human doggo,100,50,7,6,5,2

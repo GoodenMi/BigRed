@@ -56,7 +56,7 @@ public class player{
             this.equipInventory[2]= this.equipped[2];
             this.equipInventory[3]= this.equipped[3];
             this.defence = this.equipped[0].protection + this.equipped[1].protection +this.equipped[3].protection;
-            this.damage = this.equipped[2].damage;
+            this.damage = this.equipped[2].damage + (this.strength/2);
         } else if(choice.equals("Mage")){
             this.playerClass = "Mage";
             this.strength = 5;
@@ -219,7 +219,7 @@ public class player{
         if(this.playerClass == "Mage"){
             hitChance = this.wisdom*(rand.nextInt(20) + 1)+ this.level* 2;
         }else {
-            hitChance = this.dex*(rand.nextInt(20) + 1)+ this.level* 2;
+            hitChance = this.dex+(rand.nextInt(20) + 1)+ this.level* 2;
         }
         return hitChance;
     }

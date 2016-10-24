@@ -30,13 +30,13 @@ public class npc {
             this.level = level;
             this.expAwarded = expAwarded * this.level;
             this.goldAwarded = goldAwarded * this.level;
-            this.damage = (strength*this.level + dex*(1/2))/2;
+            this.damage = ((strength/2) + (dex/2)) *level;
             this.description = description;
             this.wisdom = wisdom;
             this.protection = defence+dex;
-            this.hp = 10 + (this.level*5);
-            this.strength = strength;
-            this.dex = dex;
+            this.hp = 10 + ((this.level-1)*5);
+            this.strength = strength +((this.level-1)*2);
+            this.dex = dex+(this.level-1);
         }
 
         public int hitChance(boolean isMagic) {
@@ -45,7 +45,7 @@ public class npc {
             if(isMagic == true){
                 hitChance = this.wisdom*(rand.nextInt(20)+1);
             }else {
-                hitChance= this.dex*(rand.nextInt(20) + 1)+ this.level* 2;
+                hitChance= this.dex+ (rand.nextInt(20) + 1)+ this.level* 2;
             }
             return hitChance;
         }

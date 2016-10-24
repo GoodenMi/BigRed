@@ -11,12 +11,13 @@ public class BigRed {
     public static ArrayList<item.armor> armors;
     public static ArrayList<item.headgear> headgears;
     public static ArrayList<item.shield> shields;
+    public static ArrayList<String[]> enemies;
     public static void main(String[] args) {
-        //commit test
         weapons = loadItems("weapon.txt");
         armors = loadItems("armor.txt");
         headgears = loadItems("headgear.txt");
         shields = loadItems("shield.txt");
+        enemies = loadItems("enemies");
         String choice = " ";
         Scanner input = new Scanner(System.in);
         System.out.println("Welcome. What class would you like to be? Mage, Rogue, or Knight?");
@@ -68,7 +69,7 @@ public class BigRed {
                             Integer.parseInt(itemVals[4]), Integer.parseInt(itemVals[5]), Integer.parseInt(itemVals[6]), Integer.parseInt(itemVals[7]));
                     items.add(shield);
                 } else if(filename == "enemies"){
-                    ()
+                    items.add(itemVals);
                 }
             }
         } catch (Exception e){}
@@ -80,11 +81,13 @@ public class BigRed {
         Random rand = new Random();
         int playerHp = one.hp;
         int enemyHp = two.hp;
-        System.out.println("Enemy level: "+ two.level);
+        System.out.println("Enemy: "+two.name);
+        System.out.println("Level: "+ two.level);
+        System.out.println(two.description);
         while(playerHp > 0 || enemyHp>0) {
-            int playerDamage = (one.damage+(one.strength/2))/(rand.nextInt(3)+1);
-            int enemyDamage = (two.damage+ (two.strength/2))/(rand.nextInt(3)+1);
-            int playerAttack = one.hitChance(false);
+            int playerDamage = (one.damage);
+            int enemyDamage = (two.damage);
+            int playerAttack = one.hitChance(false) + one.damage;
             int enemyDefence = two.hitChance(false) +two.protection;
             if(playerAttack> enemyDefence) {
                 enemyHp -= playerDamage;
@@ -106,8 +109,8 @@ public class BigRed {
             System.out.println("Press enter to continue;");
             input.nextLine();
             if(one.playerClass.equals("Rogue")) {
-                 playerDamage = (one.damage + (one.strength / 2))/(rand.nextInt(3) + 1)/2;
-                 enemyDamage = (two.damage+ (two.strength/2))/(rand.nextInt(3)+1);
+                 playerDamage = (one.damage);
+                 enemyDamage = (two.damage);
                  playerAttack = one.hitChance(false);
                  enemyDefence = two.hitChance(false) +two.protection;
                 if(playerAttack> enemyDefence){
@@ -133,7 +136,7 @@ public class BigRed {
                 System.out.println("Press enter to continue.");
                 input.nextLine();
             }
-            int enemyAttack = two.hitChance(false);
+            int enemyAttack = two.hitChance(false)+two.damage;
             int playerDefence;
             if(one.playerClass.equals("Mage")) {
                 playerDefence = (one.hitChance(false) + one.defence)/3;
@@ -462,9 +465,13 @@ public class BigRed {
             }else if(action.equals("battle")){
                 System.out.println("What level enemy do you want to fight?");
                 System.out.println("You get 20exp and 50 gold per level.");
-                int opponent = input.nextInt();
-                //npc two = new npc.enemy();
-                //tempexp -= battleLoop(one,two);
+                int level = input.nextInt();
+                int enemyNum = enemies.size();
+                Random rand = new Random();
+                int enemy = rand.nextInt(enemyNum);
+                String[] enemyStats = enemies.get(enemy);
+                npc.enemy two = new npc.enemy(enemyStats[0],enemyStats[1],level,Integer.parseInt(enemyStats[2]),Integer.parseInt(enemyStats[3]),Integer.parseInt(enemyStats[4]),Integer.parseInt(enemyStats[5]),Integer.parseInt(enemyStats[6]),Integer.parseInt(enemyStats[7]));
+                tempexp -= battleLoop(one,two);
             }else if(action.equals("shop")){
                 shopLoop(one);
                 System.out.println("Press enter to continue.");
